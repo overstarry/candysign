@@ -1,0 +1,10 @@
+Use case: logo-brand
+Asset type: finished macOS application icon for CandySign, a compact desktop charging monitor.
+Primary request: Create one beautifully crafted, instantly recognizable application icon, not an icon sheet or a presentation mockup.
+Subject: a single bold ivory lightning symbol, formed from two broad gently rounded horizontal strokes joined by one decisive diagonal, centered on a warm amber-orange rounded-square tile. The silhouette must read unmistakably as electric energy at 32 pixels. No small ports, cables, buttons, text, letters, numbers, or extra symbols.
+Style/medium: premium native macOS icon, restrained dimensional rendering, smooth satin ceramic/enamel, precise geometric contours. The orange tile has softly beveled edges and very subtle depth; the ivory symbol is slightly raised with a delicate contact shadow. Sophisticated and friendly, not cartoonish or plasticky.
+Composition/framing: square 1024 by 1024 canvas, perfectly front-facing and centered, no perspective tilt. The rounded-square tile fills about 84 percent of the canvas width and height with symmetrical transparent padding. A large central lightning mark takes roughly 52 percent of the tile width. Its shape remains simple and high contrast when reduced.
+Lighting/mood: soft upper-left studio illumination, a gentle warm highlight, subtle grounded depth, crisp clean edges.
+Color palette: warm amber and tangerine orange with an ivory-white central symbol; no blue, purple, rainbow, or neon glow.
+Background: genuinely transparent outside the rounded-square tile, including corners. Keep alpha transparency, no white background, no checkerboard pattern.
+Constraints: only one icon; no enclosing device mockup, no border frame, no scenery, no text, no watermark, no Apple logo. Optical balance, generous internal negative space, small-size legibility, app-store quality.

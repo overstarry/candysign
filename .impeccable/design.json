@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T11:28:56+08:00",
+  "title": "Design System: CandySign",
+  "extensions": {},
+  "components": [],
+  "narrative": {
+    "northStar": "CodexBar 式原生状态面板",
+    "overview": "沿用用户已确定的系统菜单栏风格：紧凑、克制、以读数为中心。系统字体、原生材质和细分隔线组织信息；总功率先于端口读数，设备详情在原位展开。\n\n本文件记录已实现的 SwiftUI 界面。规范依据是 `Sources/CandySignApp/ChargerPanel.swift`、`SettingsView.swift` 和 `CandySignApp.swift`。动态系统颜色、语义字号和系统控件外观保留原生语义，不转换成固定网页色值或样式。",
+    "keyCharacteristics": [
+      "系统深浅色与原生材质。",
+      "紧凑纵向端口行和稳定的数字对齐。",
+      "颜色辅助状态，文字承载含义。",
+      "详情和本次运行的曲线原位展开。"
+    ],
+    "rules": [
+      {
+        "name": "The State Text Rule",
+        "body": "状态不能仅靠颜色识别。重要状态文字使用主文本色；彩色符号仅辅助识别连接成功或异常。",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do 保持系统字体、原生材质、紧凑端口行与等宽数字。",
+      "Do 同时检查深浅色，并确保重要状态文字有清晰对比。",
+      "Do 区分真实零输出、缺失读数、旧读数和连接失败。",
+      "Do 保留键盘操作、完整行命中区域与可理解的辅助功能标签。"
+    ],
+    "donts": [
+      "Don't 添加生成插画、装饰照片、自定义网页字体或卡片式仪表盘框架。",
+      "Don't 把系统动态颜色、圆角和阴影冻结成未经验证的固定值。",
+      "Don't 把调试预览标题栏作为正式菜单栏界面的一部分。",
+      "Don't 用平滑连续线掩盖休眠或采样失败产生的时间缺口。"
+    ]
+  }
+}
