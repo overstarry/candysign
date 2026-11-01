@@ -49,23 +49,13 @@ struct SettingsView: View {
           .font(.callout)
         }
       }
-      Section(L10n.text("Monitoring")) {
-        LabeledContent(L10n.text("Refresh interval"), value: L10n.text("30 seconds"))
-        LabeledContent(L10n.text("History"), value: L10n.text("Last hour, while app is running"))
-        Text(
-          L10n.text(
-            "Monitoring pauses while your Mac sleeps. Missing readings stay as gaps. This version only reads device data."
-          )
-        )
-        .font(.caption)
-        .foregroundStyle(.secondary)
-      }
       Section {
         LabeledContent("CandySign", value: "0.1.0")
       }
     }
     .formStyle(.grouped)
-    .frame(width: 490, height: 440)
+    .frame(width: 490)
+    .fixedSize(horizontal: false, vertical: true)
     .onAppear { name = store.displayName }
   }
 

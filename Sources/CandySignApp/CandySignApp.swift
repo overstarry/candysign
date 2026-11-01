@@ -23,6 +23,8 @@ struct CandySignApplication: App {
       MenuLabel(store: store, showSettings: settings.show)
     }
     .menuBarExtraStyle(.window)
+    // Without this the panel window grows with its content but never shrinks back.
+    .windowResizability(.contentSize)
 
     .commands {
       CommandGroup(replacing: .appSettings) {

@@ -11,8 +11,6 @@
 "Total output, %@" = "总输出功率，%@";
 "%ld W total capacity" = "总功率上限 %ld W";
 "Output relative to rated capacity" = "输出功率占额定总功率的比例";
-"Last known reading" = "上次读数";
-"Live output" = "实时输出";
 "Connecting to your charger…" = "正在连接充电器…";
 "Charger unavailable" = "充电器暂不可用";
 "Connect your CoCan" = "连接你的小电拼";
@@ -57,12 +55,6 @@
 "HTTPS MCP address" = "HTTPS MCP 地址";
 "Your connection address is stored in macOS Keychain. Leave it blank to keep the saved connection." = "连接地址保存在 macOS 钥匙串中。留空即可保留已有连接。";
 "Save Connection" = "保存连接";
-"Monitoring" = "监控";
-"Refresh interval" = "刷新间隔";
-"30 seconds" = "30 秒";
-"History" = "历史数据";
-"Last hour, while app is running" = "本次运行的最近 1 小时";
-"Monitoring pauses while your Mac sleeps. Missing readings stay as gaps. This version only reads device data." = "Mac 休眠时暂停监控，缺失读数会保留为空白。本版本只读取设备数据。";
 "Saved. Connection status appears in the menu bar panel." = "已保存。可在菜单栏面板查看连接状态。";
 "Could not access Keychain. Unlock your login keychain and try again." = "无法访问钥匙串，请解锁登录钥匙串后重试。";
 "Could not load the saved connection. Open Settings to reconnect." = "无法加载已保存的连接，请打开设置重新连接。";

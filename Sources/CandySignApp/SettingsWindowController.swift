@@ -25,7 +25,6 @@ final class SettingsWindowController {
     window.styleMask = [.titled, .closable, .miniaturizable]
     window.isReleasedWhenClosed = false
     window.collectionBehavior.insert(.moveToActiveSpace)
-    window.setContentSize(NSSize(width: 490, height: 440))
     window.center()
     self.window = window
     return window

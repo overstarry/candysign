@@ -32,27 +32,24 @@ struct ChargerPanel: View {
           .padding(.horizontal, 20)
           .padding(.bottom, 12)
         }
-        ScrollView {
-          VStack(spacing: 0) {
-            ForEach(snapshot.facts.ports) { port in
-              PortRow(
-                specification: port,
-                reading: snapshot.details.ports.first { $0.port == port.index },
-                charging: snapshot.charging.isCharging(port: port.index),
-                samples: store.history.samples[port.index] ?? [],
-                expanded: store.selectedPort == port.index
-              ) {
-                store.selectedPort = store.selectedPort == port.index ? nil : port.index
-              }
-              if port.index != snapshot.facts.ports.last?.index {
-                Divider().padding(.leading, 52)
-              }
+        VStack(spacing: 0) {
+          ForEach(snapshot.facts.ports) { port in
+            PortRow(
+              specification: port,
+              reading: snapshot.details.ports.first { $0.port == port.index },
+              charging: snapshot.charging.isCharging(port: port.index),
+              samples: store.history.samples[port.index] ?? [],
+              expanded: store.selectedPort == port.index
+            ) {
+              // Not animated: an animated height change stops the menu bar window from resizing.
+              store.selectedPort = store.selectedPort == port.index ? nil : port.index
+            }
+            if port.index != snapshot.facts.ports.last?.index {
+              Divider().padding(.leading, 52)
             }
           }
-          .padding(.horizontal, 20)
         }
-        .scrollBounceBehavior(.basedOnSize)
-        .frame(height: store.selectedPort == nil ? 285 : 445)
+        .padding(.horizontal, 20)
 
         HStack(spacing: 6) {
           Image(systemName: "thermometer.medium")
@@ -136,9 +133,9 @@ struct ChargerPanel: View {
       HStack {
         Text(L10n.format("%ld W total capacity", Int(snapshot.facts.maxPowerBudget)))
         Spacer()
-        Text(
-          store.isStale || store.errorMessage != nil
-            ? L10n.text("Last known reading") : L10n.text("Live output"))
+        Text(snapshot.observedAt, format: .dateTime.hour().minute().second())
+          .monospacedDigit()
+          .help(L10n.text("Last successful reading"))
       }
       .font(.caption)
       .foregroundStyle(.secondary)
@@ -180,38 +177,55 @@ struct ChargerPanel: View {
   }
 
   private var footer: some View {
-    VStack(alignment: .leading, spacing: 12) {
-      HStack {
-        Button {
-          store.refresh()
-        } label: {
-          Label(
-            store.isRefreshing ? L10n.text("Refreshing…") : L10n.text("Refresh"),
-            systemImage: "arrow.clockwise")
-        }
-        .keyboardShortcut("r")
-        .disabled(store.isRefreshing || !store.isConfigured)
-        Spacer()
-        if let date = store.snapshot?.observedAt {
-          Text(date, format: .dateTime.hour().minute().second())
-            .font(.caption)
-            .monospacedDigit()
-            .foregroundStyle(.secondary)
-            .help(L10n.text("Last successful reading"))
-        }
+    // Refresh sits alone on the left so its changing label never shifts the other actions.
+    HStack(spacing: 18) {
+      Button {
+        store.refresh()
+      } label: {
+        Label(
+          store.isRefreshing ? L10n.text("Refreshing…") : L10n.text("Refresh"),
+          systemImage: "arrow.clockwise")
       }
-      HStack {
-        Button(action: showSettings) { Label(L10n.text("Settings…"), systemImage: "gearshape") }
-          .keyboardShortcut(",")
-        Spacer()
-        Button(L10n.text("Quit CandySign")) { NSApplication.shared.terminate(nil) }
-          .keyboardShortcut("q")
-          .foregroundStyle(.secondary)
-      }
+      .keyboardShortcut("r")
+      .disabled(store.isRefreshing || !store.isConfigured)
+      Spacer()
+      Button(action: showSettings) { Label(L10n.text("Settings…"), systemImage: "gearshape") }
+        .keyboardShortcut(",")
+      Button(L10n.text("Quit CandySign")) { NSApplication.shared.terminate(nil) }
+        .keyboardShortcut("q")
+        .foregroundStyle(.secondary)
     }
-    .buttonStyle(.plain)
+    .buttonStyle(HighlightButtonStyle())
     .font(.callout)
-    .padding(20)
+    .padding(.horizontal, 20)
+    .padding(.vertical, 16)
+  }
+}
+
+/// Menu-item feedback: a faint fill on hover that deepens the moment the pointer goes down.
+private struct HighlightButtonStyle: ButtonStyle {
+  func makeBody(configuration: Configuration) -> some View {
+    Highlighted(configuration: configuration)
+  }
+}
+
+private struct Highlighted: View {
+  let configuration: ButtonStyleConfiguration
+  @Environment(\.isEnabled) private var isEnabled
+  @State private var hovering = false
+
+  var body: some View {
+    let fill = configuration.isPressed ? 0.14 : hovering && isEnabled ? 0.07 : 0
+    configuration.label
+      .padding(.vertical, 4)
+      .contentShape(Rectangle())
+      .background {
+        RoundedRectangle(cornerRadius: 6, style: .continuous)
+          .fill(.primary.opacity(fill))
+          .padding(.horizontal, -8)
+      }
+      .opacity(isEnabled ? 1 : 0.45)
+      .onHover { hovering = $0 }
   }
 }
 
@@ -252,14 +266,15 @@ private struct PortRow: View {
           Text(reading.map { PowerFormat.string($0.watts) } ?? "— W")
             .font(.callout.weight(.semibold))
             .monospacedDigit()
-          Image(systemName: expanded ? "chevron.up" : "chevron.down")
+          Image(systemName: "chevron.right")
             .font(.system(size: 9, weight: .semibold))
             .foregroundStyle(.secondary)
+            .rotationEffect(.degrees(expanded ? 90 : 0))
+            .animation(.smooth(duration: 0.2), value: expanded)
         }
-        .padding(.vertical, 11)
-        .contentShape(Rectangle())
+        .padding(.vertical, 7)
       }
-      .buttonStyle(.plain)
+      .buttonStyle(HighlightButtonStyle())
       .accessibilityLabel(
         L10n.format(
           "Port %@, %@, %@", specification.name, state,

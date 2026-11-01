@@ -11,8 +11,6 @@
 "Total output, %@" = "Total output, %@";
 "%ld W total capacity" = "%ld W total capacity";
 "Output relative to rated capacity" = "Output relative to rated capacity";
-"Last known reading" = "Last known reading";
-"Live output" = "Live output";
 "Connecting to your charger…" = "Connecting to your charger…";
 "Charger unavailable" = "Charger unavailable";
 "Connect your CoCan" = "Connect your CoCan";
@@ -57,12 +55,6 @@
 "HTTPS MCP address" = "HTTPS MCP address";
 "Your connection address is stored in macOS Keychain. Leave it blank to keep the saved connection." = "Your connection address is stored in macOS Keychain. Leave it blank to keep the saved connection.";
 "Save Connection" = "Save Connection";
-"Monitoring" = "Monitoring";
-"Refresh interval" = "Refresh interval";
-"30 seconds" = "30 seconds";
-"History" = "History";
-"Last hour, while app is running" = "Last hour, while app is running";
-"Monitoring pauses while your Mac sleeps. Missing readings stay as gaps. This version only reads device data." = "Monitoring pauses while your Mac sleeps. Missing readings stay as gaps. This version only reads device data.";
 "Saved. Connection status appears in the menu bar panel." = "Saved. Connection status appears in the menu bar panel.";
 "Could not access Keychain. Unlock your login keychain and try again." = "Could not access Keychain. Unlock your login keychain and try again.";
 "Could not load the saved connection. Open Settings to reconnect." = "Could not load the saved connection. Open Settings to reconnect.";
