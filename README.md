@@ -2,6 +2,14 @@
 
 macOS 菜单栏充电监控程序，使用 Swift + SwiftUI，直接读取小电拼的真实 MCP 数据。首版仅查询，不修改充电策略、端口供电或设备设置。
 
+## 跨平台桌面原型
+
+新增独立的 [`desktop/`](desktop/README.md) Rust + GPUI Kit 原型，面向 macOS、Windows 和 Linux，保留当前 SwiftUI 版本及其构建流程。原型提供托盘、五端口面板、曲线展开与外观/语言设置，**仅使用演示数据，尚未接入真实 MCP**。当前仅在 Apple Silicon macOS 验证，Windows/Linux 待实机验证。
+
+```sh
+cargo run --locked --manifest-path desktop/Cargo.toml
+```
+
 ## 运行
 
 需要 macOS 14+、Swift 6.2+ 和包含 macOS SDK 的 Xcode。当前已在 Apple Silicon 上构建并验证；Intel 尚未验证。
