@@ -1,6 +1,6 @@
 # CandySign Desktop · GPUI Kit 原型
 
-独立的 Rust 桌面交互原型，使用 [GPUI Kit](https://github.com/longbridge/gpui-kit) 0.9.0。现有 SwiftUI 应用、MCP 客户端、Keychain 和打包流程不变，两者可以分别运行。
+Rust 桌面交互原型，使用 [GPUI Kit](https://github.com/longbridge/gpui-kit) 0.9.0，是仓库中唯一保留的应用实现。旧 Swift 实现及其构建流程已移除。
 
 **所有功率、设备和曲线均为合成演示数据。此原型没有网络请求，也不会读取或修改真实设备。**
 
@@ -53,12 +53,12 @@ Windows 关闭窗口后继续保留托盘进程。Linux 可能没有 SNI 宿主�
 cargo fmt --manifest-path desktop/Cargo.toml --check
 cargo clippy --locked --manifest-path desktop/Cargo.toml --all-targets -- -D warnings
 cargo build --locked --manifest-path desktop/Cargo.toml
-swift test
+cargo run --locked --manifest-path desktop/Cargo.toml -- --help
 ```
 
 原生交互检查：刷新后总功率 83.6 → 80.2 W；重复打开设置和在设置中重复按设置快捷键不创建第二个窗口；关闭后可重开；切换语言和外观同步到面板；过期/离线时托盘隐藏实时功率；浮层展开/收起和外部点击；无托盘模式关闭最后一个窗口退出。
 
-以下尚未移植：真实 MCP/JSON-RPC/SSE、只读工具白名单、安全凭据存储、定时采集、真实历史分段、睡眠/唤醒、持久化偏好和安装包/签名。设置仅影响本次进程，不读取或保存 SwiftUI 的配置。
+以下尚未移植：真实 MCP/JSON-RPC/SSE、只读工具白名单、安全凭据存储、定时采集、真实历史分段、睡眠/唤醒、持久化偏好和安装包/签名。设置仅影响本次进程。
 
 ## 结构
 
@@ -66,4 +66,4 @@ swift test
 - `src/ui.rs`：GPUI Kit 面板、端口展开、曲线和设置。
 - `src/tray.rs`：原生托盘、菜单事件和 macOS 浮层定位。
 
-下一阶段再把现有 Swift 客户端的协议与安全约束迁到独立 Rust 核心；本次不建立尚无真实调用方的核心抽象。
+下一阶段在 Rust 中接入真实 MCP，并落实只读工具白名单与安全凭据存储等约束；旧客户端可从 Git 历史查阅。本次不建立尚无真实调用方的核心抽象。

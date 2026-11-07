@@ -543,8 +543,8 @@ impl Render for Settings {
             .on_action(|_: &CloseWindow, window, _| window.remove_window())
             .child(div().text_lg().font_weight(FontWeight::SEMIBOLD).child(text("原型设置", "Prototype settings")))
             .child(div().text_xs().text_color(muted).child(text(
-                "所有读数均为演示，未连接设备。设置仅影响本次运行，不修改 SwiftUI 版本。",
-                "Demo readings only. No device connected. Session-only settings; the SwiftUI app is unchanged.",
+                "所有读数均为演示，未连接设备。设置仅影响本次运行。",
+                "Demo readings only. No device connected. Settings apply only to this session.",
             )))
             .child(div().v_flex().gap_2().child(text("外观", "Appearance")).child(appearances))
             .child(div().v_flex().gap_2().child(text("语言", "Language")).child(languages))

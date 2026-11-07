@@ -22,6 +22,8 @@ components:
 
 # Design System: CandySign
 
+> 历史记录：本文件描述已移除的 SwiftUI 版本，保留供设计参考，不代表当前 Rust 原型的实现。当前能力与运行方式见 `desktop/README.md`。
+
 ## Overview
 
 **Creative North Star: "CodexBar 式原生状态面板"**
